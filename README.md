@@ -15,11 +15,14 @@ EorzeaOutlook is a Dalamud plugin for personal calendar events, reminders, and o
 ## Dalamud Dev Plugin Loading
 
 1. Build the solution.
-2. In `/xlplugins`, add the output folder as a dev plugin path:
-   `C:\temp\EorzeaOutlook\EorzeaOutlook\bin\x64\Debug`
-3. Reload dev plugins.
+2. In Dalamud Settings, open the `Experimental` tab and enable `Enable Developer Mode`.
+3. Under `Dev Plugin Locations`, select the plugin DLL:
+   `C:\temp\EorzeaOutlook\EorzeaOutlook\bin\x64\Debug\EorzeaOutlook.dll`
+4. Reload dev plugins.
 
-Dalamud expects the generated `EorzeaOutlook.json` manifest next to `EorzeaOutlook.dll`, so add the output folder rather than the DLL itself.
+![Dalamud developer plugin settings](docs/enable_dev_plugin.png)
+
+Dalamud expects the generated `EorzeaOutlook.json` manifest to stay next to `EorzeaOutlook.dll` in the build output folder.
 
 ## In Game
 
