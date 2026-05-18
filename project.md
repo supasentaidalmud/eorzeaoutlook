@@ -36,6 +36,7 @@ Relevant Dalamud API areas for this plugin:
 - `EorzeaOutlook/EorzeaOutlook.json`: Dalamud plugin manifest.
 - `repo.json`: custom Dalamud plugin repository entry.
 - `pluginmaster.json`: compatibility alias for clients expecting the older common filename.
+- `images/`: custom repository icon assets.
 - `EorzeaOutlook/Plugin.cs`: plugin entry point, service injection, command registration, UI draw hook, framework update hook.
 - `EorzeaOutlook/Configuration.cs`: persisted plugin configuration.
 - `EorzeaOutlook/Models/EventData.cs`: event data model shared by custom and official events.
@@ -54,7 +55,7 @@ Relevant Dalamud API areas for this plugin:
 ## Build Configuration
 
 - Project SDK: `Dalamud.NET.Sdk/15.0.0`.
-- Package version: `0.0.0.2`.
+- Package version: `0.0.0.4`.
 - License metadata: `AGPL-3.0-or-later`.
 - Project URL metadata: `https://github.com/supasentaidalmud/eorzeaoutlook`.
 - Solution configurations: `Debug|x64` and `Release|x64`.
@@ -70,7 +71,7 @@ Relevant Dalamud API areas for this plugin:
 - `Name`: `Eorzea Outlook`
 - `Punchline`: `Calendar reminders and official Lodestone event tracking.`
 - `Description`: calendar for personal events, reminders, and official Lodestone in-game events; mentions `/pcalendar`.
-- `IconUrl`: `https://raw.githubusercontent.com/supasentaidalmud/eorzeaoutlook/master/docs/icon-128.png`
+- `IconUrl`: `https://raw.githubusercontent.com/supasentaidalmud/eorzeaoutlook/master/images/icon-128.png`
 - `RepoUrl`: `https://github.com/supasentaidalmud/eorzeaoutlook`
 - `ApplicableVersion`: `any`
 - `Tags`: `calendar`, `events`, `reminders`
