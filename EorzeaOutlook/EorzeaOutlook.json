@@ -1,8 +1,10 @@
 {
-  "Author": "supasentai",
+  "Author": "supasentaidalmud",
   "Name": "Eorzea Outlook",
   "Punchline": "Calendar reminders and official Lodestone event tracking.",
   "Description": "A calendar for personal events, reminders, and official Lodestone in-game events. Use /pcalendar to open Eorzea Outlook.",
+  "IconUrl": "https://raw.githubusercontent.com/supasentaidalmud/eorzeaoutlook/master/docs/icon.png",
+  "RepoUrl": "https://github.com/supasentaidalmud/eorzeaoutlook",
   "ApplicableVersion": "any",
   "Tags": [
     "calendar",

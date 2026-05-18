@@ -2,6 +2,8 @@
 
 EorzeaOutlook is a Dalamud plugin for personal calendar events, reminders, and official Lodestone in-game event tracking.
 
+![Eorzea Outlook icon](docs/icon-128.png)
+
 ## Building
 
 1. Open `EorzeaOutlook.sln`.

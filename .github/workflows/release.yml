@@ -1,16 +1,13 @@
-name: PR Build
+name: Release
 
 on:
-  pull_request:
-    branches: [ master ]
+  push:
+    tags:
+      - v*
 
 jobs:
-
-  build:
+  release:
     runs-on: windows-2022
-
-    env:
-      Solution_Name: EorzeaOutlook
 
     steps:
     - name: Checkout
@@ -26,14 +23,12 @@ jobs:
         Invoke-WebRequest -Uri https://goatcorp.github.io/dalamud-distrib/latest.zip -OutFile latest.zip
         Expand-Archive -Force latest.zip "$env:AppData\XIVLauncher\addon\Hooks\dev"
 
-    - name: Build with dotnet
+    - name: Build
       run: dotnet build --configuration Release
 
-    - name: Store artifacts
-      uses: actions/upload-artifact@v4
+    - name: Upload release artifacts
+      uses: softprops/action-gh-release@v2
       with:
-        name: EorzeaOutlook
-        path: .\EorzeaOutlook\bin\x64\Release\EorzeaOutlook\*
-        if-no-files-found: error
-        retention-days: 1
-
+        files: |
+          EorzeaOutlook/bin/x64/Release/EorzeaOutlook/latest.zip
+          EorzeaOutlook/bin/x64/Release/EorzeaOutlook/EorzeaOutlook.json

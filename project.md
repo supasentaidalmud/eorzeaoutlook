@@ -54,7 +54,7 @@ Relevant Dalamud API areas for this plugin:
 - Project SDK: `Dalamud.NET.Sdk/15.0.0`.
 - Package version: `0.0.0.1`.
 - License metadata: `AGPL-3.0-or-later`.
-- Project URL metadata: `https://github.com/mrmoeb/EorzeaOutlook`.
+- Project URL metadata: `https://github.com/supasentaidalmud/eorzeaoutlook`.
 - Solution configurations: `Debug|x64` and `Release|x64`.
 - Lock file dependencies:
   - `DalamudPackager` `15.0.0`
@@ -68,10 +68,12 @@ Relevant Dalamud API areas for this plugin:
 - `Name`: `Eorzea Outlook`
 - `Punchline`: `Calendar reminders and official Lodestone event tracking.`
 - `Description`: calendar for personal events, reminders, and official Lodestone in-game events; mentions `/pcalendar`.
+- `IconUrl`: `https://raw.githubusercontent.com/supasentaidalmud/eorzeaoutlook/master/docs/icon.png`
+- `RepoUrl`: `https://github.com/supasentaidalmud/eorzeaoutlook`
 - `ApplicableVersion`: `any`
 - `Tags`: `calendar`, `events`, `reminders`
 
-Current author: `supasentai`.
+Current author: `supasentaidalmud`.
 
 ## Runtime Architecture
 
@@ -495,7 +497,7 @@ YYYY-MM-DD
 - Changed: Centered the language settings popup over the main Eorzea Outlook window instead of the game viewport.
 - Changed: Removed the experimental audible reminder alarm; reminders are back to notification-only.
 - Changed: Adjusted reminder check cadence from every 5 seconds to every 15 seconds.
-- Changed: Set plugin manifest author to `supasentai` and removed unused `RecurringWeekly` from `EventData`.
+- Changed: Set plugin manifest author and removed unused `RecurringWeekly` from `EventData`.
 - Changed: Added a manage-mode select-all checkbox for deletion selections.
 - Changed: Added centered Eorzea time and current territory weather display with game weather icons/colors.
 - Changed: Added text-symbol fallback for weather icons when the game icon texture is unavailable.
