@@ -34,6 +34,8 @@ Relevant Dalamud API areas for this plugin:
 - `EorzeaOutlook.sln`: Visual Studio solution for the plugin.
 - `EorzeaOutlook/EorzeaOutlook.csproj`: Dalamud SDK project file.
 - `EorzeaOutlook/EorzeaOutlook.json`: Dalamud plugin manifest.
+- `repo.json`: custom Dalamud plugin repository entry.
+- `pluginmaster.json`: compatibility alias for clients expecting the older common filename.
 - `EorzeaOutlook/Plugin.cs`: plugin entry point, service injection, command registration, UI draw hook, framework update hook.
 - `EorzeaOutlook/Configuration.cs`: persisted plugin configuration.
 - `EorzeaOutlook/Models/EventData.cs`: event data model shared by custom and official events.

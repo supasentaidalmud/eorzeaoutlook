@@ -22,6 +22,14 @@ EorzeaOutlook is a Dalamud plugin for personal calendar events, reminders, and o
 
 Dalamud expects the generated `EorzeaOutlook.json` manifest to stay next to `EorzeaOutlook.dll` in the build output folder.
 
+## Custom Plugin Repository
+
+Add this URL under Dalamud Settings > Experimental > Custom Plugin Repositories:
+
+```text
+https://raw.githubusercontent.com/supasentaidalmud/eorzeaoutlook/master/repo.json
+```
+
 ## In Game
 
 Use `/pcalendar` or `/pcal` to open Eorzea Outlook.
