@@ -16,8 +16,6 @@ public class CalendarMonthView
 
     private readonly EventEditorModal editorModal;
 
-    private bool showOfficialEvents = true;
-
     private DateTime currentMonth =
         new(DateTime.Now.Year, DateTime.Now.Month, 1);
 
@@ -85,25 +83,6 @@ public class CalendarMonthView
                 plugin.Configuration.LanguageCode,
                 currentMonth));
 
-        var officialEventsLabel =
-            Loc.Text(
-                plugin.Configuration.LanguageCode,
-                "Calendar.InGameEvents",
-                "In-game events");
-
-        var checkboxWidth =
-            ImGui.CalcTextSize(officialEventsLabel).X
-            + ImGui.GetFrameHeight()
-            + (ImGui.GetStyle().ItemInnerSpacing.X * 2);
-
-        if (ImGui.GetContentRegionAvail().X > checkboxWidth + 16)
-        {
-            ImGui.SameLine();
-        }
-
-        ImGui.Checkbox(
-            $"{officialEventsLabel}##show_official_events",
-            ref showOfficialEvents);
     }
 
     private void DrawCalendarGrid(
@@ -313,7 +292,7 @@ public class CalendarMonthView
         currentMonthEvents =
             plugin.DisplayEvents
                 .Where(x =>
-                    showOfficialEvents || !x.IsOfficial)
+                    plugin.Configuration.ShowOfficialEvents || !IsLodestoneEvent(x))
                 .SelectMany(GetVisibleDaysForEvent)
                 .GroupBy(x => x.Day)
                 .ToDictionary(
@@ -356,6 +335,16 @@ public class CalendarMonthView
         {
             yield return (date.Day, evt);
         }
+    }
+
+    private static bool IsLodestoneEvent(
+        EventData evt)
+    {
+        return evt.IsOfficial
+            && string.Equals(
+                evt.Category,
+                "Official",
+                StringComparison.OrdinalIgnoreCase);
     }
 
     private Vector4 GetCategoryColor(

@@ -3,7 +3,7 @@
     "Author": "supasentaidalmud",
     "Name": "Eorzea Outlook",
     "InternalName": "EorzeaOutlook",
-    "AssemblyVersion": "0.0.0.5",
+    "AssemblyVersion": "0.0.0.6",
     "TestingAssemblyVersion": null,
     "Punchline": "Calendar reminders and official Lodestone event tracking.",
     "Description": "A calendar for personal events, reminders, and official Lodestone in-game events. Use /pcalendar to open Eorzea Outlook.",
@@ -24,6 +24,6 @@
     "DownloadLinkInstall": "https://github.com/supasentaidalmud/eorzeaoutlook/releases/latest/download/latest.zip",
     "DownloadLinkUpdate": "https://github.com/supasentaidalmud/eorzeaoutlook/releases/latest/download/latest.zip",
     "DownloadLinkTesting": null,
-    "LastUpdate": "1779188400"
+    "LastUpdate": "1779225191"
   }
 ]

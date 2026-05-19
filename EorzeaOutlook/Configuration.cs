@@ -37,6 +37,21 @@ public class Configuration : IPluginConfiguration
     public bool ShowInGameResetEvents { get; set; } =
         true;
 
+    public bool ShowOfficialEvents { get; set; } =
+        true;
+
+    public bool ShowDailyResetEvents { get; set; } =
+        true;
+
+    public bool ShowWeeklyResetEvents { get; set; } =
+        true;
+
+    public bool ShowFashionReportEvents { get; set; } =
+        true;
+
+    public bool ShowJumboCactpotEvents { get; set; } =
+        true;
+
     [NonSerialized]
     private IDalamudPluginInterface? pluginInterface;
 

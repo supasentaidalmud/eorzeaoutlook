@@ -13,7 +13,8 @@ public sealed class InGameResetEventService
         TimeSpan.FromMinutes(15);
 
     public IReadOnlyList<EventData> GetEvents(
-        DateTime now)
+        DateTime now,
+        Configuration configuration)
     {
         var start =
             now.Date.AddDays(-7);
@@ -24,25 +25,37 @@ public sealed class InGameResetEventService
         var events =
             new List<EventData>();
 
-        AddDailyEvents(
-            events,
-            start,
-            end);
+        if (configuration.ShowDailyResetEvents)
+        {
+            AddDailyEvents(
+                events,
+                start,
+                end);
+        }
 
-        AddWeeklyEvents(
-            events,
-            start,
-            end);
+        if (configuration.ShowWeeklyResetEvents)
+        {
+            AddWeeklyEvents(
+                events,
+                start,
+                end);
+        }
 
-        AddFashionReportEvents(
-            events,
-            start,
-            end);
+        if (configuration.ShowFashionReportEvents)
+        {
+            AddFashionReportEvents(
+                events,
+                start,
+                end);
+        }
 
-        AddJumboCactpotEvents(
-            events,
-            start,
-            end);
+        if (configuration.ShowJumboCactpotEvents)
+        {
+            AddJumboCactpotEvents(
+                events,
+                start,
+                end);
+        }
 
         return events;
     }

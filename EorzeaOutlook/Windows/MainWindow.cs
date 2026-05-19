@@ -507,7 +507,33 @@ public class MainWindow : Window, IDisposable
             Loc.Text(
                 plugin.Configuration.LanguageCode,
                 "Settings.ShowResetsNote",
-                "Adds daily, weekly, Gold Saucer, and Fashion Report reset entries."));
+                "Choose which recurring in-game reset entries appear."));
+
+        if (plugin.Configuration.ShowInGameResetEvents)
+        {
+            ImGui.Spacing();
+
+            DrawResetEventOptions();
+        }
+
+        ImGui.Spacing();
+
+        var showOfficialEvents =
+            plugin.Configuration.ShowOfficialEvents;
+
+        if (ImGui.Checkbox(
+                Loc.Label(
+                    plugin.Configuration.LanguageCode,
+                    "Settings.ShowOfficialEvents",
+                    "Show Lodestone events",
+                    "settings_show_official_events"),
+                ref showOfficialEvents))
+        {
+            plugin.Configuration.ShowOfficialEvents =
+                showOfficialEvents;
+
+            plugin.Configuration.Save();
+        }
 
         ImGui.Spacing();
 
@@ -526,6 +552,64 @@ public class MainWindow : Window, IDisposable
         }
 
         ImGui.EndPopup();
+    }
+
+    private void DrawResetEventOptions()
+    {
+        var firstColumnWidth =
+            170f;
+
+        plugin.Configuration.ShowDailyResetEvents =
+            DrawResetEventCheckbox(
+                "Settings.ResetDaily",
+                "Daily",
+                "settings_reset_daily",
+                plugin.Configuration.ShowDailyResetEvents);
+
+        ImGui.SameLine(firstColumnWidth);
+
+        plugin.Configuration.ShowWeeklyResetEvents =
+            DrawResetEventCheckbox(
+                "Settings.ResetWeekly",
+                "Weekly",
+                "settings_reset_weekly",
+                plugin.Configuration.ShowWeeklyResetEvents);
+
+        plugin.Configuration.ShowFashionReportEvents =
+            DrawResetEventCheckbox(
+                "Settings.ResetFashionReport",
+                "Fashion Report",
+                "settings_reset_fashion",
+                plugin.Configuration.ShowFashionReportEvents);
+
+        ImGui.SameLine(firstColumnWidth);
+
+        plugin.Configuration.ShowJumboCactpotEvents =
+            DrawResetEventCheckbox(
+                "Settings.ResetJumboCactpot",
+                "Jumbo Cactpot",
+                "settings_reset_cactpot",
+                plugin.Configuration.ShowJumboCactpotEvents);
+    }
+
+    private bool DrawResetEventCheckbox(
+        string labelKey,
+        string fallback,
+        string id,
+        bool value)
+    {
+        if (ImGui.Checkbox(
+                Loc.Label(
+                    plugin.Configuration.LanguageCode,
+                    labelKey,
+                    fallback,
+                    id),
+                ref value))
+        {
+            plugin.Configuration.Save();
+        }
+
+        return value;
     }
 
     private void DrawLayout(
@@ -602,6 +686,7 @@ public class MainWindow : Window, IDisposable
                 : plugin.DisplayEvents
                     .Where(x => (x.EndTime ?? x.StartTime) >= DateTime.Now)
                     .Where(x => !IsResetEvent(x))
+                    .Where(x => plugin.Configuration.ShowOfficialEvents || !IsLodestoneEvent(x))
                     .OrderBy(x => x.StartTime)
                     .ToList();
 
@@ -751,6 +836,16 @@ public class MainWindow : Window, IDisposable
         EventData evt)
     {
         return evt.Category is "Daily Reset" or "Weekly Reset" or "Gold Saucer";
+    }
+
+    private static bool IsLodestoneEvent(
+        EventData evt)
+    {
+        return evt.IsOfficial
+            && string.Equals(
+                evt.Category,
+                "Official",
+                StringComparison.OrdinalIgnoreCase);
     }
 
     private void ApplyResponsiveWindowSize()
