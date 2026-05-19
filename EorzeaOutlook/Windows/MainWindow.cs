@@ -515,20 +515,10 @@ public class MainWindow : Window, IDisposable
             plugin.Configuration.ShowInGameResetEvents =
                 showInGameResetEvents;
 
-            plugin.Configuration.ShowDailyResetEvents =
-                showInGameResetEvents;
-
-            plugin.Configuration.ShowWeeklyResetEvents =
-                showInGameResetEvents;
-
-            plugin.Configuration.ShowFashionReportEvents =
-                showInGameResetEvents;
-
-            plugin.Configuration.ShowJumboCactpotEvents =
-                showInGameResetEvents;
-
             plugin.Configuration.Save();
         }
+
+        DrawInGameEventCategories();
 
         ImGui.Spacing();
 
@@ -571,6 +561,73 @@ public class MainWindow : Window, IDisposable
             visible;
 
         plugin.Configuration.Save();
+    }
+
+    private void DrawInGameEventCategories()
+    {
+        ImGui.Spacing();
+
+        var firstColumnWidth =
+            170f;
+
+        plugin.Configuration.ShowDailyResetEvents =
+            DrawInGameEventCheckbox(
+                "Settings.ResetDaily",
+                "Daily",
+                "settings_reset_daily",
+                plugin.Configuration.ShowDailyResetEvents);
+
+        ImGui.SameLine(firstColumnWidth);
+
+        plugin.Configuration.ShowWeeklyResetEvents =
+            DrawInGameEventCheckbox(
+                "Settings.ResetWeekly",
+                "Weekly",
+                "settings_reset_weekly",
+                plugin.Configuration.ShowWeeklyResetEvents);
+
+        plugin.Configuration.ShowFashionReportEvents =
+            DrawInGameEventCheckbox(
+                "Settings.ResetFashionReport",
+                "Fashion Report",
+                "settings_reset_fashion",
+                plugin.Configuration.ShowFashionReportEvents);
+
+        ImGui.SameLine(firstColumnWidth);
+
+        plugin.Configuration.ShowJumboCactpotEvents =
+            DrawInGameEventCheckbox(
+                "Settings.ResetJumboCactpot",
+                "Jumbo Cactpot",
+                "settings_reset_cactpot",
+                plugin.Configuration.ShowJumboCactpotEvents);
+
+        plugin.Configuration.ShowOfficialEvents =
+            DrawInGameEventCheckbox(
+                "Settings.ShowOfficialEvents",
+                "Lodestone",
+                "settings_show_official_events",
+                plugin.Configuration.ShowOfficialEvents);
+    }
+
+    private bool DrawInGameEventCheckbox(
+        string labelKey,
+        string fallback,
+        string id,
+        bool value)
+    {
+        if (ImGui.Checkbox(
+                Loc.Label(
+                    plugin.Configuration.LanguageCode,
+                    labelKey,
+                    fallback,
+                    id),
+                ref value))
+        {
+            plugin.Configuration.Save();
+        }
+
+        return value;
     }
 
     private void DrawLayout(

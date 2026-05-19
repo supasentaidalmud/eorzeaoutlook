@@ -55,7 +55,7 @@ Relevant Dalamud API areas for this plugin:
 ## Build Configuration
 
 - Project SDK: `Dalamud.NET.Sdk/15.0.0`.
-- Package version: `0.0.0.8`.
+- Package version: `0.0.0.9`.
 - License metadata: `AGPL-3.0-or-later`.
 - Project URL metadata: `https://github.com/supasentaidalmud/eorzeaoutlook`.
 - Solution configurations: `Debug|x64` and `Release|x64`.
