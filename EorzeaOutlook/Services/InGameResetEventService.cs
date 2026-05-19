@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
+using EorzeaOutlook.Localization;
 using EorzeaOutlook.Models;
 
 namespace EorzeaOutlook.Services;
@@ -14,7 +15,8 @@ public sealed class InGameResetEventService
 
     public IReadOnlyList<EventData> GetEvents(
         DateTime now,
-        Configuration configuration)
+        Configuration configuration,
+        string languageCode)
     {
         var start =
             now.Date.AddDays(-7);
@@ -30,7 +32,8 @@ public sealed class InGameResetEventService
             AddDailyEvents(
                 events,
                 start,
-                end);
+                end,
+                languageCode);
         }
 
         if (configuration.ShowWeeklyResetEvents)
@@ -38,7 +41,8 @@ public sealed class InGameResetEventService
             AddWeeklyEvents(
                 events,
                 start,
-                end);
+                end,
+                languageCode);
         }
 
         if (configuration.ShowFashionReportEvents)
@@ -46,7 +50,8 @@ public sealed class InGameResetEventService
             AddFashionReportEvents(
                 events,
                 start,
-                end);
+                end,
+                languageCode);
         }
 
         if (configuration.ShowJumboCactpotEvents)
@@ -54,7 +59,8 @@ public sealed class InGameResetEventService
             AddJumboCactpotEvents(
                 events,
                 start,
-                end);
+                end,
+                languageCode);
         }
 
         return events;
@@ -63,14 +69,15 @@ public sealed class InGameResetEventService
     private static void AddDailyEvents(
         List<EventData> events,
         DateTime start,
-        DateTime end)
+        DateTime end,
+        string languageCode)
     {
         for (var day = start.Date; day <= end.Date; day = day.AddDays(1))
         {
             AddResetEvent(
                 events,
-                "Daily Reset",
-                "Tribal allowances, daily roulettes, daily hunts, mini cactpot, and other daily activities reset.",
+                Loc.Text(languageCode, "Reset.Daily.Title", "Daily Reset"),
+                Loc.Text(languageCode, "Reset.Daily.Description", "Tribal allowances, daily roulettes, daily hunts, mini cactpot, and other daily activities reset."),
                 "Daily Reset",
                 UtcToLocal(day, 15));
         }
@@ -79,7 +86,8 @@ public sealed class InGameResetEventService
     private static void AddWeeklyEvents(
         List<EventData> events,
         DateTime start,
-        DateTime end)
+        DateTime end,
+        string languageCode)
     {
         for (var day = start.Date; day <= end.Date; day = day.AddDays(1))
         {
@@ -90,8 +98,8 @@ public sealed class InGameResetEventService
 
             AddResetEvent(
                 events,
-                "Weekly Reset",
-                "Weekly lockouts, challenge log, custom deliveries, Wondrous Tails, Faux Hollows, and capped tomestone tracking reset.",
+                Loc.Text(languageCode, "Reset.Weekly.Title", "Weekly Reset"),
+                Loc.Text(languageCode, "Reset.Weekly.Description", "Weekly lockouts, challenge log, custom deliveries, Wondrous Tails, Faux Hollows, and capped tomestone tracking reset."),
                 "Weekly Reset",
                 UtcToLocal(day, 8));
         }
@@ -100,7 +108,8 @@ public sealed class InGameResetEventService
     private static void AddFashionReportEvents(
         List<EventData> events,
         DateTime start,
-        DateTime end)
+        DateTime end,
+        string languageCode)
     {
         for (var day = start.Date; day <= end.Date; day = day.AddDays(1))
         {
@@ -108,8 +117,8 @@ public sealed class InGameResetEventService
             {
                 AddResetEvent(
                     events,
-                    "Fashion Report Judging",
-                    "Masked Rose judging opens for the week.",
+                    Loc.Text(languageCode, "Reset.FashionJudging.Title", "Fashion Report Judging"),
+                    Loc.Text(languageCode, "Reset.FashionJudging.Description", "Masked Rose judging opens for the week."),
                     "Gold Saucer",
                     UtcToLocal(day, 8));
             }
@@ -118,8 +127,8 @@ public sealed class InGameResetEventService
             {
                 AddResetEvent(
                     events,
-                    "Fashion Report Ends",
-                    "Current Fashion Report judging period ends.",
+                    Loc.Text(languageCode, "Reset.FashionEnds.Title", "Fashion Report Ends"),
+                    Loc.Text(languageCode, "Reset.FashionEnds.Description", "Current Fashion Report judging period ends."),
                     "Gold Saucer",
                     UtcToLocal(day, 8));
             }
@@ -129,7 +138,8 @@ public sealed class InGameResetEventService
     private static void AddJumboCactpotEvents(
         List<EventData> events,
         DateTime start,
-        DateTime end)
+        DateTime end,
+        string languageCode)
     {
         for (var day = start.Date; day <= end.Date; day = day.AddDays(1))
         {
@@ -140,8 +150,8 @@ public sealed class InGameResetEventService
 
             AddResetEvent(
                 events,
-                "Jumbo Cactpot Drawing",
-                "Weekly Jumbo Cactpot drawing.",
+                Loc.Text(languageCode, "Reset.JumboCactpot.Title", "Jumbo Cactpot Drawing"),
+                Loc.Text(languageCode, "Reset.JumboCactpot.Description", "Weekly Jumbo Cactpot drawing."),
                 "Gold Saucer",
                 day.Date.AddHours(21));
         }

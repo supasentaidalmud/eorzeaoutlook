@@ -262,7 +262,7 @@ public class CalendarMonthView
 
         var label =
             UiText.FitToAvailableWidth(
-                $"{evt.Title} {timeText}",
+                $"{DisplayTitle(evt)} {timeText}",
                 8);
 
         if (ImGui.Button(
@@ -278,7 +278,7 @@ public class CalendarMonthView
         if (ImGui.IsItemHovered())
         {
             ImGui.SetTooltip(
-                $"{evt.Title}\n{Loc.DateTimeRangeLong(
+                $"{DisplayTitle(evt)}\n{Loc.DateTimeRangeLong(
                     plugin.Configuration.LanguageCode,
                     evt.StartTime,
                     evt.EndTime)}");
@@ -379,5 +379,13 @@ public class CalendarMonthView
             _ =>
                 new Vector4(0.35f, 0.35f, 0.35f, 1f)
         };
+    }
+
+    private string DisplayTitle(
+        EventData evt)
+    {
+        return evt.IsOfficial
+            ? evt.Title
+            : evt.Title;
     }
 }

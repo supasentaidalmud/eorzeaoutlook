@@ -489,6 +489,27 @@ public class MainWindow : Window, IDisposable
         var showInGameResetEvents =
             plugin.Configuration.ShowInGameResetEvents;
 
+        var allInGameEvents =
+            plugin.Configuration.ShowInGameResetEvents
+            && plugin.Configuration.ShowDailyResetEvents
+            && plugin.Configuration.ShowWeeklyResetEvents
+            && plugin.Configuration.ShowFashionReportEvents
+            && plugin.Configuration.ShowJumboCactpotEvents
+            && plugin.Configuration.ShowOfficialEvents;
+
+        if (ImGui.Checkbox(
+                Loc.Label(
+                    plugin.Configuration.LanguageCode,
+                    "Settings.ShowAllInGameEvents",
+                    "All in-game events",
+                    "settings_show_all_in_game_events"),
+                ref allInGameEvents))
+        {
+            SetAllInGameEventVisibility(allInGameEvents);
+        }
+
+        ImGui.Spacing();
+
         if (ImGui.Checkbox(
                 Loc.Label(
                     plugin.Configuration.LanguageCode,
@@ -552,6 +573,30 @@ public class MainWindow : Window, IDisposable
         }
 
         ImGui.EndPopup();
+    }
+
+    private void SetAllInGameEventVisibility(
+        bool visible)
+    {
+        plugin.Configuration.ShowInGameResetEvents =
+            visible;
+
+        plugin.Configuration.ShowDailyResetEvents =
+            visible;
+
+        plugin.Configuration.ShowWeeklyResetEvents =
+            visible;
+
+        plugin.Configuration.ShowFashionReportEvents =
+            visible;
+
+        plugin.Configuration.ShowJumboCactpotEvents =
+            visible;
+
+        plugin.Configuration.ShowOfficialEvents =
+            visible;
+
+        plugin.Configuration.Save();
     }
 
     private void DrawResetEventOptions()
@@ -763,7 +808,7 @@ public class MainWindow : Window, IDisposable
             true);
 
         var title =
-            UiText.FitToAvailableWidth(evt.Title);
+            UiText.FitToAvailableWidth(DisplayTitle(evt));
 
         if (manageEvents && !evt.IsOfficial)
         {
@@ -846,6 +891,12 @@ public class MainWindow : Window, IDisposable
                 evt.Category,
                 "Official",
                 StringComparison.OrdinalIgnoreCase);
+    }
+
+    private string DisplayTitle(
+        EventData evt)
+    {
+        return evt.Title;
     }
 
     private void ApplyResponsiveWindowSize()

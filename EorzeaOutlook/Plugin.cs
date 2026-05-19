@@ -80,7 +80,8 @@ public sealed class Plugin : IDalamudPlugin
                 Configuration.ShowInGameResetEvents
                     ? InGameResetEventService.GetEvents(
                         DateTime.Now,
-                        Configuration)
+                        Configuration,
+                        Configuration.LanguageCode)
                     : []);
 
     public Plugin()
