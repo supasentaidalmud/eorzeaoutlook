@@ -480,12 +480,8 @@ public class MainWindow : Window, IDisposable
 
         ImGui.Spacing();
 
-        var showInGameResetEvents =
-            plugin.Configuration.ShowInGameResetEvents;
-
         var allInGameEvents =
-            plugin.Configuration.ShowInGameResetEvents
-            && plugin.Configuration.ShowDailyResetEvents
+            plugin.Configuration.ShowDailyResetEvents
             && plugin.Configuration.ShowWeeklyResetEvents
             && plugin.Configuration.ShowFashionReportEvents
             && plugin.Configuration.ShowJumboCactpotEvents
@@ -503,20 +499,6 @@ public class MainWindow : Window, IDisposable
         }
 
         ImGui.Spacing();
-
-        if (ImGui.Checkbox(
-                Loc.Label(
-                    plugin.Configuration.LanguageCode,
-                    "Settings.ShowResets",
-                    "Show reset events",
-                    "settings_show_resets"),
-                ref showInGameResetEvents))
-        {
-            plugin.Configuration.ShowInGameResetEvents =
-                showInGameResetEvents;
-
-            plugin.Configuration.Save();
-        }
 
         DrawInGameEventCategories();
 
@@ -542,9 +524,6 @@ public class MainWindow : Window, IDisposable
     private void SetAllInGameEventVisibility(
         bool visible)
     {
-        plugin.Configuration.ShowInGameResetEvents =
-            visible;
-
         plugin.Configuration.ShowDailyResetEvents =
             visible;
 

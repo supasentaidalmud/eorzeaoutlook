@@ -77,12 +77,10 @@ public sealed class Plugin : IDalamudPlugin
         Configuration.Events
             .Concat(LodestoneTopicsService.OfficialEvents)
             .Concat(
-                Configuration.ShowInGameResetEvents
-                    ? InGameResetEventService.GetEvents(
-                        DateTime.Now,
-                        Configuration,
-                        Configuration.LanguageCode)
-                    : []);
+                InGameResetEventService.GetEvents(
+                    DateTime.Now,
+                    Configuration,
+                    Configuration.LanguageCode));
 
     public Plugin()
     {
