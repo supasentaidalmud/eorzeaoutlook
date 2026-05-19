@@ -66,14 +66,20 @@ public sealed class Plugin : IDalamudPlugin
 
     private LodestoneTopicsService LodestoneTopicsService { get; init; }
 
+    private InGameResetEventService InGameResetEventService { get; init; }
+
     public EorzeaTimeWeatherService EorzeaTimeWeatherService { get; init; }
 
     private DateTime lastReminderCheck =
         DateTime.MinValue;
 
     public IEnumerable<EventData> DisplayEvents =>
-        Configuration.Events.Concat(
-            LodestoneTopicsService.OfficialEvents);
+        Configuration.Events
+            .Concat(LodestoneTopicsService.OfficialEvents)
+            .Concat(
+                Configuration.ShowInGameResetEvents
+                    ? InGameResetEventService.GetEvents(DateTime.Now)
+                    : []);
 
     public Plugin()
     {
@@ -98,6 +104,9 @@ public sealed class Plugin : IDalamudPlugin
             new LodestoneTopicsService(
                 Configuration,
                 Log);
+
+        InGameResetEventService =
+            new InGameResetEventService();
 
         EorzeaTimeWeatherService =
             new EorzeaTimeWeatherService(

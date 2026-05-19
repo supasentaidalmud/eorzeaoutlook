@@ -378,6 +378,15 @@ public class CalendarMonthView
             "official" =>
                 new Vector4(0.55f, 0.35f, 0.9f, 1f),
 
+            "daily reset" =>
+                new Vector4(0.22f, 0.42f, 0.48f, 1f),
+
+            "weekly reset" =>
+                new Vector4(0.35f, 0.48f, 0.25f, 1f),
+
+            "gold saucer" =>
+                new Vector4(0.58f, 0.46f, 0.16f, 1f),
+
             _ =>
                 new Vector4(0.35f, 0.35f, 0.35f, 1f)
         };

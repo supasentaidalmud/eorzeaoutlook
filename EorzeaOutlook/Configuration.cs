@@ -34,6 +34,9 @@ public class Configuration : IPluginConfiguration
     public string LanguageCode { get; set; } =
         "Auto";
 
+    public bool ShowInGameResetEvents { get; set; } =
+        true;
+
     [NonSerialized]
     private IDalamudPluginInterface? pluginInterface;
 

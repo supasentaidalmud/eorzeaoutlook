@@ -486,6 +486,31 @@ public class MainWindow : Window, IDisposable
 
         ImGui.Spacing();
 
+        var showInGameResetEvents =
+            plugin.Configuration.ShowInGameResetEvents;
+
+        if (ImGui.Checkbox(
+                Loc.Label(
+                    plugin.Configuration.LanguageCode,
+                    "Settings.ShowResets",
+                    "Show reset events",
+                    "settings_show_resets"),
+                ref showInGameResetEvents))
+        {
+            plugin.Configuration.ShowInGameResetEvents =
+                showInGameResetEvents;
+
+            plugin.Configuration.Save();
+        }
+
+        ImGui.TextDisabled(
+            Loc.Text(
+                plugin.Configuration.LanguageCode,
+                "Settings.ShowResetsNote",
+                "Adds daily, weekly, Gold Saucer, and Fashion Report reset entries."));
+
+        ImGui.Spacing();
+
         ImGui.Separator();
 
         ImGui.Spacing();
@@ -576,6 +601,7 @@ public class MainWindow : Window, IDisposable
                     .ToList()
                 : plugin.DisplayEvents
                     .Where(x => (x.EndTime ?? x.StartTime) >= DateTime.Now)
+                    .Where(x => !IsResetEvent(x))
                     .OrderBy(x => x.StartTime)
                     .ToList();
 
@@ -719,6 +745,12 @@ public class MainWindow : Window, IDisposable
         ImGui.PopID();
 
         ImGui.Spacing();
+    }
+
+    private static bool IsResetEvent(
+        EventData evt)
+    {
+        return evt.Category is "Daily Reset" or "Weekly Reset" or "Gold Saucer";
     }
 
     private void ApplyResponsiveWindowSize()
