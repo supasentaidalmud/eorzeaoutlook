@@ -27,41 +27,29 @@ public sealed class InGameResetEventService
         var events =
             new List<EventData>();
 
-        if (configuration.ShowDailyResetEvents)
-        {
-            AddDailyEvents(
-                events,
-                start,
-                end,
-                languageCode);
-        }
+        AddDailyEvents(
+            events,
+            start,
+            end,
+            languageCode);
 
-        if (configuration.ShowWeeklyResetEvents)
-        {
-            AddWeeklyEvents(
-                events,
-                start,
-                end,
-                languageCode);
-        }
+        AddWeeklyEvents(
+            events,
+            start,
+            end,
+            languageCode);
 
-        if (configuration.ShowFashionReportEvents)
-        {
-            AddFashionReportEvents(
-                events,
-                start,
-                end,
-                languageCode);
-        }
+        AddFashionReportEvents(
+            events,
+            start,
+            end,
+            languageCode);
 
-        if (configuration.ShowJumboCactpotEvents)
-        {
-            AddJumboCactpotEvents(
-                events,
-                start,
-                end,
-                languageCode);
-        }
+        AddJumboCactpotEvents(
+            events,
+            start,
+            end,
+            languageCode);
 
         return events;
     }

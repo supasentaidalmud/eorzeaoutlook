@@ -478,12 +478,6 @@ public class MainWindow : Window, IDisposable
             plugin.RefreshOfficialEvents(false);
         }
 
-        ImGui.TextDisabled(
-            Loc.Text(
-                plugin.Configuration.LanguageCode,
-                "Settings.Note",
-                "Applies to plugin text."));
-
         ImGui.Spacing();
 
         var showInGameResetEvents =
@@ -521,37 +515,17 @@ public class MainWindow : Window, IDisposable
             plugin.Configuration.ShowInGameResetEvents =
                 showInGameResetEvents;
 
-            plugin.Configuration.Save();
-        }
+            plugin.Configuration.ShowDailyResetEvents =
+                showInGameResetEvents;
 
-        ImGui.TextDisabled(
-            Loc.Text(
-                plugin.Configuration.LanguageCode,
-                "Settings.ShowResetsNote",
-                "Choose which recurring in-game reset entries appear."));
+            plugin.Configuration.ShowWeeklyResetEvents =
+                showInGameResetEvents;
 
-        if (plugin.Configuration.ShowInGameResetEvents)
-        {
-            ImGui.Spacing();
+            plugin.Configuration.ShowFashionReportEvents =
+                showInGameResetEvents;
 
-            DrawResetEventOptions();
-        }
-
-        ImGui.Spacing();
-
-        var showOfficialEvents =
-            plugin.Configuration.ShowOfficialEvents;
-
-        if (ImGui.Checkbox(
-                Loc.Label(
-                    plugin.Configuration.LanguageCode,
-                    "Settings.ShowOfficialEvents",
-                    "Show Lodestone events",
-                    "settings_show_official_events"),
-                ref showOfficialEvents))
-        {
-            plugin.Configuration.ShowOfficialEvents =
-                showOfficialEvents;
+            plugin.Configuration.ShowJumboCactpotEvents =
+                showInGameResetEvents;
 
             plugin.Configuration.Save();
         }
@@ -597,64 +571,6 @@ public class MainWindow : Window, IDisposable
             visible;
 
         plugin.Configuration.Save();
-    }
-
-    private void DrawResetEventOptions()
-    {
-        var firstColumnWidth =
-            170f;
-
-        plugin.Configuration.ShowDailyResetEvents =
-            DrawResetEventCheckbox(
-                "Settings.ResetDaily",
-                "Daily",
-                "settings_reset_daily",
-                plugin.Configuration.ShowDailyResetEvents);
-
-        ImGui.SameLine(firstColumnWidth);
-
-        plugin.Configuration.ShowWeeklyResetEvents =
-            DrawResetEventCheckbox(
-                "Settings.ResetWeekly",
-                "Weekly",
-                "settings_reset_weekly",
-                plugin.Configuration.ShowWeeklyResetEvents);
-
-        plugin.Configuration.ShowFashionReportEvents =
-            DrawResetEventCheckbox(
-                "Settings.ResetFashionReport",
-                "Fashion Report",
-                "settings_reset_fashion",
-                plugin.Configuration.ShowFashionReportEvents);
-
-        ImGui.SameLine(firstColumnWidth);
-
-        plugin.Configuration.ShowJumboCactpotEvents =
-            DrawResetEventCheckbox(
-                "Settings.ResetJumboCactpot",
-                "Jumbo Cactpot",
-                "settings_reset_cactpot",
-                plugin.Configuration.ShowJumboCactpotEvents);
-    }
-
-    private bool DrawResetEventCheckbox(
-        string labelKey,
-        string fallback,
-        string id,
-        bool value)
-    {
-        if (ImGui.Checkbox(
-                Loc.Label(
-                    plugin.Configuration.LanguageCode,
-                    labelKey,
-                    fallback,
-                    id),
-                ref value))
-        {
-            plugin.Configuration.Save();
-        }
-
-        return value;
     }
 
     private void DrawLayout(
